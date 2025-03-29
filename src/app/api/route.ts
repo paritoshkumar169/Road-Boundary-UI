@@ -30,17 +30,19 @@ async function saveFile(file: File): Promise<{ id: string; path: string; ext: st
     }
   }
 
-  const uploadDir = path.join(process.cwd(), "public", "uploads");
+  const uploadDir = path.join('/tmp', "uploads");
   try {
     await fs.mkdir(uploadDir, { recursive: true });
   } catch (err) {
     console.error("Error creating upload directory:", err);
   }
-
+  
   const filePath = path.join(uploadDir, `${id}${ext}`);
   await fs.writeFile(filePath, Buffer.from(data));
   console.log(`File saved: ${filePath}`);
+  
   return { id, path: filePath, ext };
+  
 }
 
 export async function POST(request: NextRequest) {

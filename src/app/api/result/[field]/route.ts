@@ -21,19 +21,20 @@ export async function GET(
       return NextResponse.json({ error: "Invalid field ID" }, { status: 400 });
     }
 
-    const resultsDir = path.join(process.cwd(), "public", "results");
+    const resultsDir = path.join('/tmp', "results");
 
     // Ensure the results directory exists
     try {
-      await fs.access(resultsDir);
-    } catch {
-      console.error(`Error: Results directory not found: ${resultsDir}`);
+      // Use mkdir instead of access to create the directory if it doesn't exist
+      await fs.mkdir(resultsDir, { recursive: true });
+    } catch (error) {
+      console.error(`Error: Cannot create results directory: ${resultsDir}`, error);
       return NextResponse.json(
-        { error: "Results directory not found" },
+        { error: "Cannot create results directory" },
         { status: 500 }
       );
     }
-
+    
     // Read the results directory
     let files: string[];
     try {
