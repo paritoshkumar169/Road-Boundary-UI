@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Road Boundary Detection  
 
-## Getting Started
+This is a **Next.js** project bootstrapped with `create-next-app`. The project aims to detect unmarked road boundaries using **YOLO-based segmentation models**. The models have been trained using the Python files available in the following GitHub repository:  
 
-First, run the development server:
+🔗 **GitHub Repository**: [Road Boundary Detection](https://github.com/paritoshkumar169/Road-boundary-detection)  
+🚀 **Live Deployment**: [Vercel Link](https://vercel.com/paritoshkumar169s-projects/road-boundary-ui)  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📸 UI Preview  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Result](public/result.png)  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔧 Getting Started  
 
-## Learn More
+To set up the project locally, follow these steps:  
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/your-repository/road-boundary-ui.git
+   cd road-boundary-ui
+🛠️ Training Your Own Model
+If you want to train your own YOLO models, refer to the Python files available in the repository mentioned above.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📌 Future Scope of Improvement
+Backend Deployment: Setting up a Python environment on a hosted backend to avoid errors and improve model execution.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Better API Handling: Enhancing API request management for smoother performance and reduced latency.
 
-## Deploy on Vercel
+✅ Project Status
+Running the project locally produced results that were satisfying and close to self-annotations.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The YOLO-based segmentation models successfully detect unmarked road boundaries in daytime conditions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🎨 Fonts & Styling
+This project uses next/font to automatically optimize and load Geist, a modern font family for Vercel.
+
