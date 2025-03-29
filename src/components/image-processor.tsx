@@ -10,15 +10,17 @@ const ImageProcessor = () => {
   const [error, setError] = useState<string | null>(null)
 
   // Then replace the catch block in processImage with:
-  const processImage = async () => {
-    try {
-      // Your image processing logic here
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred"
-      console.error("Error processing image:", errorMessage)
-      setError(errorMessage)
-    }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+const processImage = async () => {
+  try {
+    // Your image processing logic here
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+    console.error("Error processing image:", errorMessage);
+    setError(errorMessage);
   }
+};
+
 
   // Add this UI element where appropriate in your render function
   return (

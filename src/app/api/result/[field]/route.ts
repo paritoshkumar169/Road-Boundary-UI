@@ -4,20 +4,21 @@ import fs from "fs/promises";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { fileId?: string } }
+  { params }: { params: Promise<{ field: string }> }
 ) {
   try {
-    const { fileId } = params;
+    // Await the params promise to extract 'field'
+    const { field } = await params;
 
-    if (!fileId) {
-      console.error("Error: Missing file ID");
-      return NextResponse.json({ error: "Missing file ID" }, { status: 400 });
+    if (!field) {
+      console.error("Error: Missing field ID");
+      return NextResponse.json({ error: "Missing field ID" }, { status: 400 });
     }
 
-    // Validate fileId to prevent path traversal attacks
-    if (!/^[a-zA-Z0-9_-]+$/.test(fileId)) {
-      console.error(`Error: Invalid file ID: ${fileId}`);
-      return NextResponse.json({ error: "Invalid file ID" }, { status: 400 });
+    // Validate field ID to prevent path traversal attacks
+    if (!/^[a-zA-Z0-9_-]+$/.test(field)) {
+      console.error(`Error: Invalid field ID: ${field}`);
+      return NextResponse.json({ error: "Invalid field ID" }, { status: 400 });
     }
 
     const resultsDir = path.join(process.cwd(), "public", "results");
@@ -27,7 +28,10 @@ export async function GET(
       await fs.access(resultsDir);
     } catch {
       console.error(`Error: Results directory not found: ${resultsDir}`);
-      return NextResponse.json({ error: "Results directory not found" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Results directory not found" },
+        { status: 500 }
+      );
     }
 
     // Read the results directory
@@ -37,13 +41,18 @@ export async function GET(
       console.log(`Files in results directory: ${files}`);
     } catch (error) {
       console.error("Error reading results directory:", error);
-      return NextResponse.json({ error: "Error accessing results" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Error accessing results" },
+        { status: 500 }
+      );
     }
 
-    // Find the file
-    const resultFile = files.find((file) => file.startsWith(`${fileId}_result`));
+    // Find the file using the 'field' variable
+    const resultFile = files.find((file) =>
+      file.startsWith(`${field}_result`)
+    );
     if (!resultFile) {
-      console.error(`Error: Result not found for fileId: ${fileId}`);
+      console.error(`Error: Result not found for field ID: ${field}`);
       console.log(`Available files: ${files.join(", ")}`);
       return NextResponse.json({ error: "Result not found" }, { status: 404 });
     }
@@ -55,14 +64,21 @@ export async function GET(
     let fileBuffer: Buffer;
     try {
       fileBuffer = await fs.readFile(filePath);
-      console.log(`Successfully read file: ${filePath}, size: ${fileBuffer.length} bytes`);
+      console.log(
+        `Successfully read file: ${filePath}, size: ${fileBuffer.length} bytes`
+      );
     } catch (error) {
       console.error("Error reading result file:", error);
-      return NextResponse.json({ error: "Error reading result file" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Error reading result file" },
+        { status: 500 }
+      );
     }
 
     // Determine content type
-    const contentType = getContentType(path.extname(resultFile).toLowerCase());
+    const contentType = getContentType(
+      path.extname(resultFile).toLowerCase()
+    );
 
     if (!contentType.startsWith("image/") && !contentType.startsWith("video/")) {
       console.error(`Error: Invalid file type detected: ${contentType}`);

@@ -87,9 +87,10 @@ export async function POST(request: NextRequest) {
       result = JSON.parse(stdout);
       console.log("Python script result:", result);
     } catch (e) {
-      console.error("Failed to parse Python output:", stdout);
+      console.error("Failed to parse Python output:", e, stdout);
       result = { success: false, error: "Failed to process file" };
     }
+    
 
     if (!result.success) {
       console.error("Processing failed:", result.error);

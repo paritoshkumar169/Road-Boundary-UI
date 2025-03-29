@@ -150,13 +150,13 @@ export default function RoadBoundaryDetector() {
         body: formData,
       })
 
-      // Handle response
-      let responseBody
-      try {
-        responseBody = await response.clone().json()
-      } catch (jsonError) {
-        responseBody = await response.text()
-      }
+     // Handle response
+let responseBody;
+try {
+  responseBody = await response.clone().json();
+} catch {
+  responseBody = await response.text();
+}
 
       if (!response.ok) {
         const errorText = responseBody.error || `Server returned ${response.status} ${response.statusText}`
@@ -220,6 +220,9 @@ export default function RoadBoundaryDetector() {
             Road Boundary and Object Detection models trained on self-annotated images, specifically for both daytime and nighttime conditions using the YOLO Segmentation Model. Test its accuracy with your own images or explore our sample images.            </p>
           </div>
         </div>
+        <button onClick={() => setDisplayMode(displayMode === "draw" ? "view" : "draw")}>
+  Toggle Mode
+</button>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-1 space-y-6">
