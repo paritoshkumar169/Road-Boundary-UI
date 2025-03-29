@@ -63,7 +63,8 @@ export async function POST(request: NextRequest) {
     console.log(`Parameters: model=${model}, confidence=${confidence}, displayMode=${displayMode}`);
 
     // Create results directory if it doesn't exist
-    const resultsDir = path.join(process.cwd(), "public", "results");
+    const resultsDir = path.join('/tmp', "results");
+
     try {
       await fs.mkdir(resultsDir, { recursive: true });
     } catch (err) {
