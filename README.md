@@ -1,4 +1,4 @@
-# 🚀 Road Boundary Detection  
+#  Road Boundary Detection  
 
 This is a **Next.js** project bootstrapped with `create-next-app`. The project aims to detect unmarked road boundaries using **YOLO-based segmentation models**. The models have been trained using the Python files available in the following GitHub repository:  
 
