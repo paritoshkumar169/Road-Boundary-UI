@@ -19,10 +19,10 @@ To set up the project locally, follow these steps:
    ```bash
    git clone https://github.com/your-repository/road-boundary-ui.git
    cd road-boundary-ui
-🛠️ Training Your Own Model
+ Training Your Own Model
 If you want to train your own YOLO models, refer to the Python files available in the repository mentioned above.
 
-📌 Future Scope of Improvement
+ Future Scope of Improvement
 Backend Deployment: Setting up a Python environment on a hosted backend to avoid errors and improve model execution.
 
 Better API Handling: Enhancing API request management for smoother performance and reduced latency.
@@ -32,6 +32,6 @@ Running the project locally produced results that were satisfying and close to s
 
 The YOLO-based segmentation models successfully detect unmarked road boundaries in daytime conditions.
 
-🎨 Fonts & Styling
+Fonts & Styling
 This project uses next/font to automatically optimize and load Geist, a modern font family for Vercel.
 
